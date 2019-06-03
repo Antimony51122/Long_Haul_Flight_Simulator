@@ -11,6 +11,10 @@ public class AnimatorController : MonoBehaviour {
     [SerializeField] private RuntimeAnimatorController _controllerSit      = null;
     [SerializeField] private RuntimeAnimatorController _controllerTraverse = null;
 
+    [SerializeField] private GameObject _waypointNetwork_seatToWCBack    = null;
+    [SerializeField] private GameObject _waypointNetwork_WCBackToWCFront = null;
+    [SerializeField] private GameObject _waypointNetwork_WCFrontToSeat   = null;
+
     [SerializeField] private bool _isTraversing;
 
     private NavAgentNoRootMotion _navAgentNoRootMotion;
@@ -23,6 +27,7 @@ public class AnimatorController : MonoBehaviour {
         _navAgentNoRootMotion = GetComponent<NavAgentNoRootMotion>();
 
         _navAgentNoRootMotion.enabled = false;
+
     }
 
     void Update() {

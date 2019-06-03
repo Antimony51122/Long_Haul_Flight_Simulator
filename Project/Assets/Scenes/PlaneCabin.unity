@@ -657,7 +657,7 @@ GameObject:
   m_Component:
   - component: {fileID: 168888462}
   m_Layer: 0
-  m_Name: Waypoint Network 2
+  m_Name: Waypoint Network Seat to WC Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1579,6 +1579,8 @@ Transform:
   m_Children:
   - {fileID: 1128044109}
   - {fileID: 168888462}
+  - {fileID: 472112427}
+  - {fileID: 555712151}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1922,6 +1924,36 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 458567722}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &472112426
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 472112427}
+  m_Layer: 0
+  m_Name: Waypoint Network WC Back to WC Front
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &472112427
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 472112426}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 7.7234507, y: 9.032669, z: -18.161095}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 422162612}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &478665281
 GameObject:
   m_ObjectHideFlags: 0
@@ -2045,6 +2077,36 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 491609930}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &555712150
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 555712151}
+  m_Layer: 0
+  m_Name: Waypoint Network WC Front to Seat
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &555712151
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 555712150}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 7.7234507, y: 9.032669, z: -18.161095}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 422162612}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &574739005 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -5975033157549033438, guid: 7338396fde7ebc34597b1c8f3d61668c,
@@ -2397,7 +2459,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 639650390}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c57dff63eefd00649975e9299acf872f, type: 3}
   m_Name: 
@@ -2452,6 +2514,9 @@ MonoBehaviour:
   _avatarTraverse: {fileID: 9000000, guid: 7338396fde7ebc34597b1c8f3d61668c, type: 3}
   _controllerSit: {fileID: 9100000, guid: b6fbab1004ca5ed46b44c536ab34ce6f, type: 2}
   _controllerTraverse: {fileID: 9100000, guid: 79f439171df41d044bb306c9e595bc24, type: 2}
+  _waypointNetwork_seatToWCBack: {fileID: 0}
+  _waypointNetwork_WCBackToWCFront: {fileID: 0}
+  _waypointNetwork_WCFrontToSeat: {fileID: 0}
   _isTraversing: 0
 --- !u!1 &640979801
 GameObject:
@@ -3233,11 +3298,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: 7338396fde7ebc34597b1c8f3d61668c,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 319f256600661ff4cbb3a07875fe3503, type: 2}
     - target: {fileID: -5975033157549033438, guid: 7338396fde7ebc34597b1c8f3d61668c,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -3313,6 +3373,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: 7338396fde7ebc34597b1c8f3d61668c,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 319f256600661ff4cbb3a07875fe3503, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7338396fde7ebc34597b1c8f3d61668c, type: 3}
 --- !u!1 &950927303 stripped
@@ -3796,7 +3861,7 @@ GameObject:
   - component: {fileID: 1128044109}
   - component: {fileID: 1128044108}
   m_Layer: 0
-  m_Name: Waypoint Network 1
+  m_Name: Waypoint Network Traverse 2 Washrooms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4305,21 +4370,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: 7338396fde7ebc34597b1c8f3d61668c,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: b6fbab1004ca5ed46b44c536ab34ce6f, type: 2}
-    - target: {fileID: -6057140222963153312, guid: 7338396fde7ebc34597b1c8f3d61668c,
-        type: 3}
-      propertyPath: m_WarningMessage
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: 7338396fde7ebc34597b1c8f3d61668c,
-        type: 3}
-      propertyPath: m_Avatar
-      value: 
-      objectReference: {fileID: 9000000, guid: 8d15da606c9c880429d0d61be0a4a971, type: 3}
     - target: {fileID: -5975033157549033438, guid: 7338396fde7ebc34597b1c8f3d61668c,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -4395,6 +4445,21 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: 7338396fde7ebc34597b1c8f3d61668c,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: b6fbab1004ca5ed46b44c536ab34ce6f, type: 2}
+    - target: {fileID: -6057140222963153312, guid: 7338396fde7ebc34597b1c8f3d61668c,
+        type: 3}
+      propertyPath: m_WarningMessage
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: 7338396fde7ebc34597b1c8f3d61668c,
+        type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 8d15da606c9c880429d0d61be0a4a971, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7338396fde7ebc34597b1c8f3d61668c, type: 3}
 --- !u!1 &1345341715 stripped
@@ -6111,16 +6176,6 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: 7338396fde7ebc34597b1c8f3d61668c,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 79f439171df41d044bb306c9e595bc24, type: 2}
-    - target: {fileID: -6057140222963153312, guid: 7338396fde7ebc34597b1c8f3d61668c,
-        type: 3}
-      propertyPath: m_ApplyRootMotion
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: -5975033157549033438, guid: 7338396fde7ebc34597b1c8f3d61668c,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -6195,6 +6250,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: 7338396fde7ebc34597b1c8f3d61668c,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 79f439171df41d044bb306c9e595bc24, type: 2}
+    - target: {fileID: -6057140222963153312, guid: 7338396fde7ebc34597b1c8f3d61668c,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7338396fde7ebc34597b1c8f3d61668c, type: 3}

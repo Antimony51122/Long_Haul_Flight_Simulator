@@ -126,7 +126,15 @@ public class NavAgentNoRootMotion : MonoBehaviour {
 
         Transform nextWaypointTransform = null;
 
-        int nextWaypoint = (CurrentIndex + incStep >= WaypointNetwork.Waypoints.Count) ? 0 : CurrentIndex + incStep;
+        // if current index + increment step > highest number of waypoints return 0
+        // when reaching the last destination, reset to 0
+        //int nextWaypoint = (CurrentIndex + incStep >= WaypointNetwork.Waypoints.Count) ? 0 : CurrentIndex + incStep;
+        
+        // if current index + increment step > highest number of waypoints return the current index itself
+        // when reaching the last destination, stay right there
+        int nextWaypoint = (CurrentIndex + incStep >= WaypointNetwork.Waypoints.Count) ? 
+            CurrentIndex : CurrentIndex + incStep;
+
         nextWaypointTransform = WaypointNetwork.Waypoints[nextWaypoint];
 
         // Assuming we have a valid waypoint transform
