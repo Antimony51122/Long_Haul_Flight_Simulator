@@ -16,6 +16,7 @@ public class AnimatorController : MonoBehaviour {
     [SerializeField] private GameObject _waypointNetwork_WCFrontToSeat   = null;
 
     [SerializeField] private bool _isTraversing;
+    [SerializeField] private bool _isSitting;
 
     private NavAgentNoRootMotion _navAgentNoRootMotion;
 
@@ -23,6 +24,7 @@ public class AnimatorController : MonoBehaviour {
         _animator = GetComponent<Animator>();
 
         _isTraversing = false;
+        _isSitting = true;
 
         _navAgentNoRootMotion = GetComponent<NavAgentNoRootMotion>();
 
@@ -31,8 +33,29 @@ public class AnimatorController : MonoBehaviour {
     }
 
     void Update() {
-        AssignTraverseAnimator();
+        //AssignTraverseAnimator();
+        StartCoroutine(GoToWC());
+
+
         AssignSitAnimator();
+    }
+
+    IEnumerator GoToWC() {
+        if (!_isSitting) {
+            // set _isTraversing to true to satisfy the condition preparing for traverse
+            _isTraversing = true;
+
+            // set the StandingUp parameter in the animator to true to invoke the sit to stand posture
+            _animator.SetBool("StandingUp", true);
+
+            // wait for 2 second for the mecanim to complete the sit to stand posture
+            yield return new WaitForSeconds(2);
+
+            //float posZ = transform.position.z;
+            //posZ = 0.0f;
+
+            AssignTraverseAnimator();
+        }
     }
 
     private void AssignTraverseAnimator() {
