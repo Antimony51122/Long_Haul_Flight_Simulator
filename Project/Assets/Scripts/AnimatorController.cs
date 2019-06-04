@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AnimatorController : MonoBehaviour {
     private Animator _animator = null;
@@ -53,6 +54,8 @@ public class AnimatorController : MonoBehaviour {
 
             //float posZ = transform.position.z;
             //posZ = 0.0f;
+
+            GetComponent<NavMeshAgent>().nextPosition = transform.position;
 
             AssignTraverseAnimator();
         }
