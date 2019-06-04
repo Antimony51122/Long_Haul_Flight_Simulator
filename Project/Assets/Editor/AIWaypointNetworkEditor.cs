@@ -107,7 +107,7 @@ public class AIWaypointNetworkEditor : Editor {
                 // Set Handles color to Yellow
                 Handles.color = Color.yellow;
 
-                // Draw a polyline passing int he path's corner points
+                // Draw a poly-line passing int he path's corner points
                 Handles.DrawPolyLine(path.corners);
             }
         }

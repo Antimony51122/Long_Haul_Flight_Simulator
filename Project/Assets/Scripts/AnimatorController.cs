@@ -21,8 +21,16 @@ public class AnimatorController : MonoBehaviour {
 
     private NavAgentNoRootMotion _navAgentNoRootMotion;
 
+    private float _navPosZ;
+
+    private float posZ;
+
     void Start() {
         _animator = GetComponent<Animator>();
+
+        _navPosZ = GetComponent<NavMeshAgent>().transform.position.z;
+
+        posZ = transform.position.z;
 
         _isTraversing = false;
         _isSitting = true;
@@ -34,15 +42,22 @@ public class AnimatorController : MonoBehaviour {
     }
 
     void Update() {
+        
+        Debug.Log(_navPosZ);
+
         //AssignTraverseAnimator();
         StartCoroutine(GoToWC());
 
 
         AssignSitAnimator();
+
     }
 
     IEnumerator GoToWC() {
         if (!_isSitting) {
+
+            
+
             // set _isTraversing to true to satisfy the condition preparing for traverse
             _isTraversing = true;
 
@@ -50,14 +65,18 @@ public class AnimatorController : MonoBehaviour {
             _animator.SetBool("StandingUp", true);
 
             // wait for 2 second for the mecanim to complete the sit to stand posture
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(2.2f);
 
             //float posZ = transform.position.z;
             //posZ = 0.0f;
 
-            GetComponent<NavMeshAgent>().nextPosition = transform.position;
+            Debug.Log("lalalala");
+            _navPosZ = 0.0f;
+            Debug.Log("lalalala");
+
 
             AssignTraverseAnimator();
+            //_isSitting = true;
         }
     }
 
