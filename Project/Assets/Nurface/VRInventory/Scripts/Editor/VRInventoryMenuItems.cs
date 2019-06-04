@@ -15,7 +15,11 @@ namespace MobileVRInventory {
                 Debug.LogWarning("[MobileVRInventory] Player Prefab not found.");
                 return;
             }
-            var playerPrefab = (GameObject)AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(playerPrefabGuid), typeof(GameObject));
+
+            var playerPrefab = (GameObject) AssetDatabase.LoadAssetAtPath(
+                AssetDatabase.GUIDToAssetPath(playerPrefabGuid),
+                typeof(GameObject));
+
             var playerInstance = GameObject.Instantiate(playerPrefab);
             playerInstance.name = "Player";
 
@@ -24,24 +28,27 @@ namespace MobileVRInventory {
                 Debug.LogWarning("[MobileVRInventory] VRInventory Prefab not found.");
                 return;
             }
-            var inventoryPrefab = (GameObject)AssetDatabase.LoadAssetAtPath(AssetDatabase.GUIDToAssetPath(inventoryPrefabGuid), typeof(GameObject));
+
+            var inventoryPrefab = (GameObject) AssetDatabase.LoadAssetAtPath(
+                AssetDatabase.GUIDToAssetPath(inventoryPrefabGuid),
+                typeof(GameObject));
+
             var inventoryInstance = GameObject.Instantiate(inventoryPrefab);
             inventoryInstance.name = "VRInventory";
 
             // Find UI References
             VRInventory vrInventoryScript = inventoryInstance.GetComponent<VRInventory>();
             vrInventoryScript.inventoryPositionTransform = GameObject.Find("InventoryPosition").transform;
-            vrInventoryScript.handPosition = GameObject.Find("HandPosition").transform;
+            vrInventoryScript.handPosition               = GameObject.Find("HandPosition").transform;
 
             // Add an event system if necessary
-            var eventSystem = GameObject.FindObjectOfType<EventSystem>();
+            var        eventSystem   = GameObject.FindObjectOfType<EventSystem>();
             GameObject eventSystemGO = null;
 
             if (eventSystem == null) {
                 eventSystemGO = new GameObject("EventSystem");
                 eventSystemGO.AddComponent<EventSystem>();
-            }
-            else {
+            } else {
                 eventSystemGO = eventSystem.gameObject;
             }
 
