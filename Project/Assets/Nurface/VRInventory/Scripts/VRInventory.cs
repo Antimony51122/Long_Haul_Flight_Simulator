@@ -413,8 +413,13 @@ namespace MobileVRInventory
 
         public void PointerEnterTrigger() {
             pointerOverTrigger = true;
-            if (currentUI != null) return;
-            if (inventoryTriggerMode == eInventoryTriggerMode.GazeTrigger) Spawn();
+            if (currentUI != null) {
+                return;
+            }
+
+            if (inventoryTriggerMode == eInventoryTriggerMode.GazeTrigger) {
+                Spawn();
+            }
         }
 
         public void PointerExitTrigger() {
