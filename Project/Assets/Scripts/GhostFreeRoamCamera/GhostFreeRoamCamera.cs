@@ -66,7 +66,7 @@ public class GhostFreeRoamCamera : MonoBehaviour {
                 if (!togglePressed) {
                     togglePressed     = true;
                     Screen.lockCursor = !Screen.lockCursor;
-                    Cursor.visible    = !Cursor.visible;
+                    Cursor.visible = !Cursor.visible;
                 }
             } else togglePressed = false;
         } else {

@@ -349,10 +349,9 @@ namespace MobileVRInventory
             return pickupResult.result;
         }
 
-        /// <summary>
+
         /// Remove the specified item from the inventory
         /// Specify a quantity of -1 in order to remove all items
-        /// </summary>
         /// <param name="name"></param>
         public void RemoveItem(string name, int quantity = 1, InventoryItemStack stackToRemoveFrom = null) {
             var stack = stackToRemoveFrom ?? items.FirstOrDefault(i => i.item.name == name);
@@ -376,9 +375,7 @@ namespace MobileVRInventory
             ItemsUpdated();
         }
 
-        /// <summary>
-        /// Notify that the item collection has been updated (and should be re-rendered)
-        /// </summary>
+        // Notify that the item collection has been updated (and should be re-rendered)
         public void ItemsUpdated() {            
             ValidateItems();
             if (autoSave) Save();
@@ -388,9 +385,7 @@ namespace MobileVRInventory
             UpdateNextAndPreviousButtons();            
         }
 
-        /// <summary>
-        /// Spawn the Inventory UI
-        /// </summary>
+        // Spawn the Inventory UI
         public void Spawn() {
             currentUI = (GameObject)Instantiate(inventoryUIPrefab, inventoryPositionTransform.position, mainCamera.rotation);
             currentUI.transform.eulerAngles = new Vector3(currentUI.transform.eulerAngles.x, currentUI.transform.eulerAngles.y, 0f);

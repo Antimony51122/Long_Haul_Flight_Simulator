@@ -43,7 +43,7 @@ public class AnimatorController : MonoBehaviour {
 
     void Update() {
         
-        Debug.Log(_navPosZ);
+        //Debug.Log(_navPosZ);
 
         //AssignTraverseAnimator();
         StartCoroutine(GoToWC());
@@ -70,9 +70,9 @@ public class AnimatorController : MonoBehaviour {
             //float posZ = transform.position.z;
             //posZ = 0.0f;
 
-            Debug.Log("lalalala");
+            //Debug.Log("lalalala");
             _navPosZ = 0.0f;
-            Debug.Log("lalalala");
+            //Debug.Log("lalalala");
 
 
             AssignTraverseAnimator();
