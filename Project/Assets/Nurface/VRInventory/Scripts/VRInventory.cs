@@ -442,19 +442,24 @@ namespace MobileVRInventory
             if (pointerOverCanvas == false && pointerOverTrigger == false) {
                 if (hideAnimationInProgress || currentUI == null || this == null || this.gameObject == null) yield break;
                 hideAnimationInProgress = true;
-                iTween.ScaleTo(currentUI, iTween.Hash("scale", Vector3.zero, "time", 0.75f, "oncomplete", "HideComplete", "oncompletetarget", this.gameObject));
+                iTween.ScaleTo(currentUI, 
+                    iTween.Hash("scale", Vector3.zero,
+                        "time",             0.75f, 
+                        "oncomplete",       "HideComplete", 
+                        "oncompletetarget", this.gameObject));
             }
         }
 
         void HideComplete() {
             hideAnimationInProgress = false;
-            if (currentUI != null) Destroy(currentUI);
+            if (currentUI != null) {
+                Destroy(currentUI);
+            }
         }
         
         void Update() {
             // Contextual item usage
-            if (!itemEquippedThisFrame && Input.GetButtonDown("Fire1") && equippedItemInstance != null)
-            {
+            if (!itemEquippedThisFrame && Input.GetButtonDown("Fire1") && equippedItemInstance != null) {
                 equippedItemInstance.OnItemUsed();
             }
 

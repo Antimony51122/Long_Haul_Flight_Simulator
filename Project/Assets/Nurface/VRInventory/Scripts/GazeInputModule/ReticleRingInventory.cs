@@ -46,8 +46,7 @@ public class ReticleRingInventory: MonoBehaviour, GazePointerInventory {
     // Maximum distance of the reticle (in meters).
     private const float kReticleDistanceMax = 10.0f;
 
-    // Current inner and outer diameters of the reticle,
-    // before distance multiplication.
+    // Current inner and outer diameters of the reticle, before distance multiplication.
     private float reticleInnerDiameter = 0.0f;
     private float reticleOuterDiameter = 0.0f;
 
@@ -91,31 +90,21 @@ public class ReticleRingInventory: MonoBehaviour, GazePointerInventory {
         SetGazeTarget(intersectionPosition, isInteractive);
     }
 
-    /// Called every frame the user is still looking at a valid GameObject. This
-    /// can be a 3D or UI element.
-    ///
-    /// The camera is the event camera, the target is the object the user is
-    /// looking at, and the intersectionPosition is the intersection point of the
-    /// ray sent from the camera on the object.
+    // Called every frame the user is still looking at a valid GameObject. This can be a 3D or UI element.
+    // The camera is the event camera, the target is the object the user is looking at, and the intersectionPosition is the intersection point of the ray sent from the camera on the object.
     public void OnGazeStay(Camera camera, GameObject targetObject, Vector3 intersectionPosition, bool isInteractive) {
         SetGazeTarget(intersectionPosition, isInteractive);
     }
 
-    /// Called when the user's look no longer intersects an object previously
-    /// intersected with a ray projected from the camera.
-    /// This is also called just before **OnGazeDisabled** and may have have any of
-    /// the values set as **null**.
-    ///
-    /// The camera is the event camera and the target is the object the user
-    /// previously looked at.
+    // Called when the user's look no longer intersects an object previously intersected with a ray projected from the camera. This is also called just before **OnGazeDisabled** and may have have any of the values set as **null**.
+    // The camera is the event camera and the target is the object the user previously looked at.
     public void OnGazeExit(Camera camera, GameObject targetObject) {
         reticleDistanceInMeters = kReticleDistanceMax;
         reticleInnerAngle = kReticleMinInnerAngle;
         reticleOuterAngle = kReticleMinOuterAngle;
     }
 
-    /// Called when a trigger event is initiated. This is practically when
-    /// the user begins pressing the trigger.
+    // Called when a trigger event is initiated. This is practically when the user begins pressing the trigger.
     public void OnGazeTriggerStart(Camera camera) {
         // Put your reticle trigger start logic here :)
     }
@@ -183,7 +172,6 @@ public class ReticleRingInventory: MonoBehaviour, GazePointerInventory {
         mesh.vertices = vertices;
         mesh.triangles = indices;
         mesh.RecalculateBounds();
-        ;
     }
 
     private void UpdateDiameters() {

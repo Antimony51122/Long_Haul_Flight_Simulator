@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(CharacterController))]
 public class DemoAutowalkInventory : MonoBehaviour {
@@ -39,7 +40,9 @@ public class DemoAutowalkInventory : MonoBehaviour {
             }
         }
         // Otherwise if the Google VR button, or the Gear VR touchpad is pressed
-        else if (Input.GetButtonDown("Fire1")) {
+        else if (Input.GetButtonDown("Fire1") /* ||
+                 // returns true if the primary button (typically “A”) was pressed this frame.
+                 OVRInput.GetDown(OVRInput.Button.One) */) {
             GameObject currentGazeObject = gazeInputModule.GetCurrentGameObject();
             if (currentGazeObject != null) {
                 if (currentGazeObject.layer == 5){                    
