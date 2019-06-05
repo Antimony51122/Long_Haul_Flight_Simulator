@@ -93,14 +93,20 @@ namespace MobileVRInventory {
 
             if (healthSlider != null) {
                 iTween.ValueTo(gameObject,
-                    iTween.Hash("from", healthSlider.value, "to", health, "time", time, "onupdate",
-                        "UpdateHealthBarAnimation", "easetype", "easeinsine"));
+                    iTween.Hash("from", healthSlider.value, 
+                        "to",       health, 
+                        "time",     time, 
+                        "onupdate", "UpdateHealthBarAnimation", 
+                        "easetype", "easeinsine"));
             }
 
             if (manaSlider != null) {
                 iTween.ValueTo(gameObject,
-                    iTween.Hash("from", manaSlider.value, "to", mana, "time", time, "onupdate",
-                        "UpdateManaBarAnimation", "easetype", "easeinsine"));
+                    iTween.Hash("from", manaSlider.value, 
+                        "to",       mana, 
+                        "time",     time, 
+                        "onupdate", "UpdateManaBarAnimation", 
+                        "easetype", "easeinsine"));
             }
 
             FadeOutBars();
@@ -119,12 +125,18 @@ namespace MobileVRInventory {
         void FadeOutBars() {
             iTween.StopByName(barsPanel.gameObject, "fadeOutBars");
             iTween.ScaleTo(barsPanel.gameObject,
-                iTween.Hash("scale", Vector3.zero, "time", 1f, "delay", 4f, "name", "fadeOutBars"));
+                iTween.Hash("scale", Vector3.zero, 
+                    "time",  1f, 
+                    "delay", 4f, 
+                    "name",  "fadeOutBars"));
         }
 
         void FadeInBars() {
             iTween.StopByName(barsPanel.gameObject, "fadeInBars");
-            iTween.ScaleTo(barsPanel.gameObject, iTween.Hash("scale", Vector3.one, "time", 1f, "name", "fadeInBars"));
+            iTween.ScaleTo(barsPanel.gameObject, 
+                iTween.Hash("scale", Vector3.one, 
+                    "time", 1f, 
+                    "name", "fadeInBars"));
         }
 
         void FadeOutCoins() {
@@ -148,8 +160,13 @@ namespace MobileVRInventory {
             var time = Mathf.Min(0.1f * Math.Abs(valueAfter - valueBefore), 2f);
 
             iTween.ValueTo(this.gameObject,
-                iTween.Hash("from", valueBefore, "to", valueAfter, "time", time, "onupdate", "UpdateCoinText",
-                    "easetype", "easeinsine", "oncomplete", "FadeOutCoins"));
+                iTween.Hash(
+                    "from", valueBefore, 
+                    "to",         valueAfter, 
+                    "time",       time, 
+                    "onupdate",   "UpdateCoinText",
+                    "easetype",   "easeinsine", 
+                    "oncomplete", "FadeOutCoins"));
         }
 
 

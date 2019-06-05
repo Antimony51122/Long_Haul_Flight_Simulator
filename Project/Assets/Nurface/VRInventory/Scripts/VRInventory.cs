@@ -118,7 +118,7 @@ namespace MobileVRInventory
 
         void Awake() {
             if (!itemDatabase) Debug.LogWarning("[MobileVRInventory] Warning: VRInventory requires a reference to an InventoryItemDatabase.");
-            if (inventoryPositionTransform == null) { inventoryPositionTransform = Camera.main.transform.FindChild("InventoryPosition"); }            
+            if (inventoryPositionTransform == null) { inventoryPositionTransform = Camera.main.transform.Find("InventoryPosition"); }            
             mainCamera = Camera.main.transform;
 
             if(Application.isPlaying && autoSave) Load();
