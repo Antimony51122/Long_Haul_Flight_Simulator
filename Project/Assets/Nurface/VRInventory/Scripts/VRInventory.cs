@@ -8,120 +8,132 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace MobileVRInventory
-{
+namespace MobileVRInventory {
     [ExecuteInEditMode]
-    public class VRInventory : MonoBehaviour
-    {
+    public class VRInventory : MonoBehaviour {
         #region Items
-        [SerializeField]
-        public InventoryItemDatabase itemDatabase;       
-        [SerializeField]
-        public List<InventoryItemStack> items = new List<InventoryItemStack>();
 
-        [SerializeField]
-        public bool autoSave = false;
-        [SerializeField]
-        public string saveSlotName = "Slot1";
+        [SerializeField] public InventoryItemDatabase    itemDatabase;
+        [SerializeField] public List<InventoryItemStack> items = new List<InventoryItemStack>();
 
-        public int itemStackCount
-        {
+        [SerializeField] public bool   autoSave     = false;
+        [SerializeField] public string saveSlotName = "Slot1";
+
+        public int itemStackCount {
             get { return items.Count; }
         }
 
-        private int itemStackColumnCount
-        {
+        private int itemStackColumnCount {
             get { return Mathf.CeilToInt(itemStackCount / 3f); }
         }
+
         #endregion
 
         #region References
+
         public GameObject inventoryUIPrefab;
         public GameObject itemTemplate;
-        public Transform inventoryPositionTransform;
-        public Transform handPosition;        
+        public Transform  inventoryPositionTransform;
+        public Transform  handPosition;
+
         #endregion
 
         #region Events
-        public enum eInventoryTriggerMode { GazeTrigger, InputFire1 };
+
+        public enum eInventoryTriggerMode {
+            GazeTrigger,
+            InputFire1
+        };
+
         public eInventoryTriggerMode inventoryTriggerMode = eInventoryTriggerMode.GazeTrigger;
-        public bool hideWhenItemSelected = false;
+        public bool                  hideWhenItemSelected = false;
 
         [System.Serializable]
-        public class VRInventoryItemSelectEvent : UnityEvent<InventoryItemStack> { }        
+        public class VRInventoryItemSelectEvent : UnityEvent<InventoryItemStack> { }
+
         public VRInventoryItemSelectEvent onItemSelected = new VRInventoryItemSelectEvent();
 
-        public enum ePickUpResult { Success, Failed_CannotCarryMode };
+        public enum ePickUpResult {
+            Success,
+            Failed_CannotCarryMode
+        };
 
         [System.Serializable]
         public class InventoryItemPickupResult {
             public InventoryItemData item;
-            public int quantity = 1;
-            public ePickUpResult result = ePickUpResult.Success;
+            public int               quantity = 1;
+            public ePickUpResult     result   = ePickUpResult.Success;
         }
 
         [System.Serializable]
         public class VRInventoryItemPickupResultEvent : UnityEvent<InventoryItemPickupResult> { };
-        public VRInventoryItemPickupResultEvent onItemPickedUp = new VRInventoryItemPickupResultEvent();                
+
+        public VRInventoryItemPickupResultEvent onItemPickedUp = new VRInventoryItemPickupResultEvent();
+
         #endregion
 
         #region Edit Mode
+
         public bool showInventoryItemsInEditMode = false;
+
         #endregion
 
         #region Internal
-        private float columnWidth = 50f;
-        private int column = 0;
-        private Vector3 desiredScale = Vector3.one;
-        private bool hideAnimationInProgress = false;
-        private Transform mainCamera;
-        private GameObject currentUI;
-        private GameObject scrollLeftButton;
-        private GameObject scrollRightButton;
-        private ScrollRect itemContainerScrollRect;
-        private Button _scrollLeftButton;
-        private Button _scrollRightButton;
-        private bool pointerOverTrigger, pointerOverCanvas;
-        private InventoryItemData equippedItem = null;
-        private EquippableInventoryItemBase equippedItemInstance = null;
-        private Transform equippedItemTransform = null;
-        private bool itemEquippedThisFrame = false;
+
+        private float                       columnWidth             = 50f;
+        private int                         column                  = 0;
+        private Vector3                     desiredScale            = Vector3.one;
+        private bool                        hideAnimationInProgress = false;
+        private Transform                   mainCamera;
+        private GameObject                  currentUI;
+        private GameObject                  scrollLeftButton;
+        private GameObject                  scrollRightButton;
+        private ScrollRect                  itemContainerScrollRect;
+        private Button                      _scrollLeftButton;
+        private Button                      _scrollRightButton;
+        private bool                        pointerOverTrigger, pointerOverCanvas;
+        private InventoryItemData           equippedItem          = null;
+        private EquippableInventoryItemBase equippedItemInstance  = null;
+        private Transform                   equippedItemTransform = null;
+        private bool                        itemEquippedThisFrame = false;
 
         private GazeInputModuleInventory _gazeInputModule = null;
-        private GazeInputModuleInventory gazeInputModule
-        {
-            get
-            {
-                if (_gazeInputModule == null)
-                {
+
+        private GazeInputModuleInventory gazeInputModule {
+            get {
+                if (_gazeInputModule == null) {
                     _gazeInputModule = GameObject.FindObjectOfType<GazeInputModuleInventory>();
                 }
+
                 return _gazeInputModule;
             }
         }
 
-        private AudioSource _audioSource
-        {
-            get
-            {
+        private AudioSource _audioSource {
+            get {
                 var source = this.GetComponent<AudioSource>();
-                if (source == null)
-                {
-                    source = this.gameObject.AddComponent<AudioSource>();
+                if (source == null) {
+                    source        = this.gameObject.AddComponent<AudioSource>();
                     source.volume = 0.25f;
                 }
 
                 return source;
             }
         }
+
         #endregion
 
         void Awake() {
-            if (!itemDatabase) Debug.LogWarning("[MobileVRInventory] Warning: VRInventory requires a reference to an InventoryItemDatabase.");
-            if (inventoryPositionTransform == null) { inventoryPositionTransform = Camera.main.transform.Find("InventoryPosition"); }            
+            if (!itemDatabase)
+                Debug.LogWarning(
+                    "[MobileVRInventory] Warning: VRInventory requires a reference to an InventoryItemDatabase.");
+            if (inventoryPositionTransform == null) {
+                inventoryPositionTransform = Camera.main.transform.Find("InventoryPosition");
+            }
+
             mainCamera = Camera.main.transform;
 
-            if(Application.isPlaying && autoSave) Load();
+            if (Application.isPlaying && autoSave) Load();
         }
 
         void OnEnable() {
@@ -161,11 +173,11 @@ namespace MobileVRInventory
             iTween.StopByName(itemContainerScrollRect.content.gameObject, "vrInventoryScrollAnimation");
             iTween.ValueTo(itemContainerScrollRect.content.gameObject,
                 iTween.Hash("name", "vrInventoryScrollAnimation",
-                            "from", itemContainerScrollRect.content.anchoredPosition3D.x,
-                            "to", columnWidth * -column,
-                            "time", 0.25f,
-                            "onupdatetarget", this.gameObject,
-                            "onupdate", "SetScrollRectContentXPosition"));
+                    "from",           itemContainerScrollRect.content.anchoredPosition3D.x,
+                    "to",             columnWidth * -column,
+                    "time",           0.25f,
+                    "onupdatetarget", this.gameObject,
+                    "onupdate",       "SetScrollRectContentXPosition"));
         }
 
         void UpdateNextAndPreviousButtons() {
