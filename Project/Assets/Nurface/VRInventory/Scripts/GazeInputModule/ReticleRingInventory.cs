@@ -20,7 +20,7 @@ public class ReticleRingInventory: MonoBehaviour, GazePointerInventory {
     /// Number of segments making the reticle circle.
     public int reticleSegments = 20;
 
-    /// Growth speed multiplier for the reticle/
+    /// Growth speed multiplier for the reticle
     public float reticleGrowthSpeed = 8.0f;
 
     // Private members
@@ -38,8 +38,7 @@ public class ReticleRingInventory: MonoBehaviour, GazePointerInventory {
     private const float kReticleMinInnerAngle = 0.0f;
     // Minimum outer angle of the reticle (in degrees).
     private const float kReticleMinOuterAngle = 0.5f;
-    // Angle at which to expand the reticle when intersecting with an object
-    // (in degrees).
+    // Angle at which to expand the reticle when intersecting with an object (in degrees).
     private const float kReticleGrowthAngle = 1.5f;
 
     // Minimum distance of the reticle (in meters).

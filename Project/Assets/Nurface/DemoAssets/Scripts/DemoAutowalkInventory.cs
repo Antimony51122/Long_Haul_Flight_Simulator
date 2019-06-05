@@ -3,6 +3,10 @@ using System.Collections;
 
 [RequireComponent(typeof(CharacterController))]
 public class DemoAutowalkInventory : MonoBehaviour {
+    // ==============================================================================
+    // Config Params
+    // ==============================================================================
+
     // Move speed
     public float moveSpeed = 3f;
     // If the player is allowed to move (don't allow movement when looking at UI)
@@ -13,21 +17,26 @@ public class DemoAutowalkInventory : MonoBehaviour {
     private bool moveForward;
     // Gaze Input Module, to know what object user is looking at
     private GazeInputModuleInventory gazeInputModule;
-    
-    // Use this for initialization
+
+    // ==============================================================================
+    // Main Loop
+    // ==============================================================================
+
     void Start () {
         // Get CharacterController
         myCC = GetComponent<CharacterController>();
+        
         // Find GazeInputModule
         gazeInputModule = GameObject.FindObjectOfType<GazeInputModuleInventory>();
     }
 	
-	// Update is called once per frame
 	void Update () {
         // If there is an interactive object at gaze and it's within distance
         if (allowMovement == false || GameObject.Find("InventoryUI(Clone)") != null) {
             // do not allow movement
-            if (moveForward == true) { moveForward = false; }
+            if (moveForward == true) {
+                moveForward = false;
+            }
         }
         // Otherwise if the Google VR button, or the Gear VR touchpad is pressed
         else if (Input.GetButtonDown("Fire1")) {
@@ -49,6 +58,10 @@ public class DemoAutowalkInventory : MonoBehaviour {
             myCC.SimpleMove(forward * moveSpeed);
         }
     }
+
+    // ==============================================================================
+    // Custom Methods
+    // ==============================================================================
 
     public void AllowMovement(bool status) {
         allowMovement = status;

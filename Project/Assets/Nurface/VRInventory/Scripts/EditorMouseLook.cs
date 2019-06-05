@@ -14,7 +14,6 @@ namespace MobileVRInventory {
             mouseZ = transform.rotation.eulerAngles.z;
         }
 
-        // Update is called once per frame
         void Update() {
             // If the ALT button is pressed, rotate head
             if (Input.GetKey(KeyCode.LeftAlt) || Input.GetKey(KeyCode.RightAlt)) {
