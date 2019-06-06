@@ -139,6 +139,7 @@ namespace MobileVRInventory {
                 inventoryPositionTransform = Camera.main.transform.Find("InventoryPosition");
             }
 
+            // TODO: don't forget to drag the prefab in the hierarchy to the script component in the inspector
             if (rightControllerTransform == null) {
                 rightControllerTransform = Camera.main.transform.Find("RightControllerPf");
             }
