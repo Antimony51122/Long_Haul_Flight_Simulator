@@ -36,6 +36,9 @@ namespace MobileVRInventory {
         public Transform  inventoryPositionTransform;
         public Transform  handPosition;
 
+        // TODO: don't forget to drag the prefab in the hierarchy to the script component in the inspector
+        [SerializeField] private Transform rightControllerTransform;
+
         #endregion
 
         #region Events
@@ -123,12 +126,21 @@ namespace MobileVRInventory {
 
         #endregion
 
+        // =====================================================================================
+        // Main Loop
+        // =====================================================================================
+
         void Awake() {
             if (!itemDatabase){
-                Debug.LogWarning(
-                    "[MobileVRInventory] Warning: VRInventory requires a reference to an InventoryItemDatabase.");}
+                Debug.LogWarning("[MobileVRInventory] Warning: VRInventory requires a reference to an InventoryItemDatabase.");
+            }
+
             if (inventoryPositionTransform == null) {
                 inventoryPositionTransform = Camera.main.transform.Find("InventoryPosition");
+            }
+
+            if (rightControllerTransform == null) {
+                rightControllerTransform = Camera.main.transform.Find("RightControllerPf");
             }
 
             mainCamera = Camera.main.transform;
@@ -141,6 +153,33 @@ namespace MobileVRInventory {
         void OnEnable() {
             ValidateItems();
         }
+
+        void Update() {
+            Debug.Log(inventoryPositionTransform.transform.position);
+
+            // Contextual item usage
+            if (!itemEquippedThisFrame && Input.GetButtonDown("Fire1") && equippedItemInstance != null) {
+                equippedItemInstance.OnItemUsed();
+            }
+
+            itemEquippedThisFrame = false;
+
+            if (inventoryTriggerMode == eInventoryTriggerMode.InputFire1) {
+                if (Input.GetButtonDown("Fire1")) {
+                    if (currentUI == null) {
+                        Spawn();
+                    } else {
+                        if (hideAnimationInProgress == true) {
+                            HideComplete();
+                            Spawn();
+                        } else {
+                            Hide();
+                        }
+                    }
+                }
+            }
+        }
+
 
         void ValidateItems() {
             if (itemDatabase == null) return;
@@ -405,7 +444,13 @@ namespace MobileVRInventory {
         // Spawn the Inventory UI
         // -------------------------------------------------------------------------------------------
         public void Spawn() {
+            // spawn the UI at the right hand controller object's position
+            //currentUI = (GameObject)Instantiate(inventoryUIPrefab, rightControllerTransform.position, mainCamera.rotation);
+
+            // spawn the UI at the inventoryPosition object's position
             currentUI = (GameObject)Instantiate(inventoryUIPrefab, inventoryPositionTransform.position, mainCamera.rotation);
+
+            // set the rotation of the UI to the rotation of the camera
             currentUI.transform.eulerAngles = new Vector3(currentUI.transform.eulerAngles.x, currentUI.transform.eulerAngles.y, 0f);
             GameObject canvas = currentUI.transform.GetChild(0).GetChild(0).gameObject;
             CreateEvent(canvas, EventTriggerType.PointerEnter, PointerEnterCanvas);
@@ -475,31 +520,6 @@ namespace MobileVRInventory {
             }
         }
         
-        void Update() {
-            // Contextual item usage
-            if (!itemEquippedThisFrame && Input.GetButtonDown("Fire1") && equippedItemInstance != null) {
-                equippedItemInstance.OnItemUsed();
-            }
-
-            itemEquippedThisFrame = false;
-
-            if (inventoryTriggerMode == eInventoryTriggerMode.InputFire1) {
-                if (Input.GetButtonDown("Fire1")) {
-                    if(currentUI == null) {
-                        Spawn();
-                    }
-                    else {
-                        if (hideAnimationInProgress == true) {
-                            HideComplete();
-                            Spawn();
-                        }
-                        else {
-                            Hide();
-                        }
-                    }
-                }
-            }            
-        }
 
         // Create an Event on an Event Trigger
         private void CreateEvent(GameObject o, EventTriggerType type, UnityAction action) {            
