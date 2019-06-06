@@ -54,8 +54,8 @@ namespace MobileVRInventory {
 
         void ItemSelected(InventoryItemStack stack) {
             switch (stack.item.name) {
-                case "Health Potion":
-                    HandleHealthPotionUse(stack);
+                case "Chocolate":
+                    HandleChocolateUse(stack);
                     break;
                 case "Mana Potion":
                     HandleManaPotionUse(stack);
@@ -75,10 +75,10 @@ namespace MobileVRInventory {
             }
         }
         
-        void HandleHealthPotionUse(InventoryItemStack stack) {
+        void HandleChocolateUse(InventoryItemStack stack) {
             if (fullness < 100) {
                 fullness = Math.Min(fullness + 25, 100);
-                VRInventory.RemoveItem("Health Potion", 1, stack);
+                VRInventory.RemoveItem("Chocolate", 1, stack);
                 UpdateBars();
             } else {
                 ShowMessage("You are already full!");
