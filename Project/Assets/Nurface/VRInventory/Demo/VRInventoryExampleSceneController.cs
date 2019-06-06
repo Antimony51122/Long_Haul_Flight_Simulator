@@ -6,17 +6,22 @@ using System;
 
 namespace MobileVRInventory {
     public class VRInventoryExampleSceneController : MonoBehaviour {
-        [Range(0, 100)] public int health = 50;
 
+
+        [Range(0, 100)] public int health = 50;
         [Range(0, 100)] public int mana = 15;
 
         [Header("References")] public VRInventory VRInventory;
 
+        // Meter Panel
         public Image  barsPanel;
         public Slider healthSlider;
         public Slider manaSlider;
+
+        // Coin Panel
         public Image  coinsPanel;
         public Text   coinsText;
+
         public Image  messagePanel;
         public Text   messageText;
 
@@ -31,7 +36,7 @@ namespace MobileVRInventory {
             UpdateBars(true);
 
             // Fade out the bars after a brief delay
-            FadeOutBars();
+            //FadeOutBars();
 
             // Update our coin text
             UpdateCoinText();
@@ -65,7 +70,7 @@ namespace MobileVRInventory {
                 ShowMessage("You cannot carry anymore of those.");
             }
         }
-
+        
         void HandleHealthPotionUse(InventoryItemStack stack) {
             if (health < 100) {
                 health = Math.Min(health + 25, 100);
@@ -89,7 +94,8 @@ namespace MobileVRInventory {
         void UpdateBars(bool instant = false) {
             var time = instant ? 0f : 0.5f;
 
-            FadeInBars();
+            // 
+            //FadeInBars();
 
             if (healthSlider != null) {
                 iTween.ValueTo(gameObject,
@@ -109,7 +115,8 @@ namespace MobileVRInventory {
                         "easetype", "easeinsine"));
             }
 
-            FadeOutBars();
+            // Fade out the bars after a brief delay
+            //FadeOutBars();
         }
 
         // Called by iTween to animate the Health Bar

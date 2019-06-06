@@ -163,6 +163,7 @@ namespace MobileVRInventory {
 
             itemEquippedThisFrame = false;
 
+            // show the inventory UI if it has been assigned to InputFire1 mode in the inspector
             if (inventoryTriggerMode == eInventoryTriggerMode.InputFire1) {
                 if (Input.GetButtonDown("Fire1")) {
                     if (currentUI == null) {
