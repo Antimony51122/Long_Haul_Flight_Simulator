@@ -41,7 +41,10 @@ public class DemoAutowalkInventory : MonoBehaviour {
         } else if (Input.GetButtonDown("Fire1") /* ||
                  // returns true if the primary button (typically “A”) was pressed this frame.
                  OVRInput.GetDown(OVRInput.Button.One) */) {
-            // --- Otherwise if the Google VR button, or the Gear VR touchpad is pressed ---
+            // What can "Fire1" represent:
+            // - Google VR button
+            // - Gear VR touchpad
+            // - Oculus handcontroller button "A" (Oculus one needs the device to be put on)
             GameObject currentGazeObject = gazeInputModule.GetCurrentGameObject();
             if (currentGazeObject != null) {
                 if (currentGazeObject.layer == 5) {
@@ -51,6 +54,8 @@ public class DemoAutowalkInventory : MonoBehaviour {
 
             // Change the state of moveForward
             moveForward = !moveForward;
+
+            // stop moving by reset all vectors to zero
             if (moveForward == false) {
                 myCC.SimpleMove(Vector3.zero);
             }

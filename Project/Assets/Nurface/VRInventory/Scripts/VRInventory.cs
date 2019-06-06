@@ -156,8 +156,6 @@ namespace MobileVRInventory {
         }
 
         void Update() {
-            Debug.Log(inventoryPositionTransform.transform.position);
-
             // Contextual item usage
             if (!itemEquippedThisFrame && Input.GetButtonDown("Fire1") && equippedItemInstance != null) {
                 equippedItemInstance.OnItemUsed();
