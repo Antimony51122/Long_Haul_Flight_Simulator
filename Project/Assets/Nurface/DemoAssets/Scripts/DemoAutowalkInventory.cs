@@ -38,11 +38,10 @@ public class DemoAutowalkInventory : MonoBehaviour {
             if (moveForward == true) {
                 moveForward = false;
             }
-        }
-        // Otherwise if the Google VR button, or the Gear VR touchpad is pressed
-        else if (Input.GetButtonDown("Fire1") /* ||
+        } else if (Input.GetButtonDown("Fire1") /* ||
                  // returns true if the primary button (typically “A”) was pressed this frame.
                  OVRInput.GetDown(OVRInput.Button.One) */) {
+            // --- Otherwise if the Google VR button, or the Gear VR touchpad is pressed ---
             GameObject currentGazeObject = gazeInputModule.GetCurrentGameObject();
             if (currentGazeObject != null) {
                 if (currentGazeObject.layer == 5) {

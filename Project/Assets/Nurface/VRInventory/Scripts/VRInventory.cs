@@ -401,7 +401,9 @@ namespace MobileVRInventory {
             UpdateNextAndPreviousButtons();            
         }
 
+        // -------------------------------------------------------------------------------------------
         // Spawn the Inventory UI
+        // -------------------------------------------------------------------------------------------
         public void Spawn() {
             currentUI = (GameObject)Instantiate(inventoryUIPrefab, inventoryPositionTransform.position, mainCamera.rotation);
             currentUI.transform.eulerAngles = new Vector3(currentUI.transform.eulerAngles.x, currentUI.transform.eulerAngles.y, 0f);
