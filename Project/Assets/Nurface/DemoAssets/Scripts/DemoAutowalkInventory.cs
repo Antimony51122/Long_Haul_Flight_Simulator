@@ -30,9 +30,9 @@ public class DemoAutowalkInventory : MonoBehaviour {
         // Find GazeInputModule
         gazeInputModule = GameObject.FindObjectOfType<GazeInputModuleInventory>();
     }
-	
-	void Update () {
-        // If there is an interactive object at gaze and it's within distance
+
+    void Update() {
+        // If there is an interactive object at gaze and it's within distance, don't move towards it
         if (allowMovement == false || GameObject.Find("InventoryUI(Clone)") != null) {
             // do not allow movement
             if (moveForward == true) {
@@ -45,14 +45,18 @@ public class DemoAutowalkInventory : MonoBehaviour {
                  OVRInput.GetDown(OVRInput.Button.One) */) {
             GameObject currentGazeObject = gazeInputModule.GetCurrentGameObject();
             if (currentGazeObject != null) {
-                if (currentGazeObject.layer == 5){                    
+                if (currentGazeObject.layer == 5) {
                     return;
                 }
             }
+
             // Change the state of moveForward
             moveForward = !moveForward;
-            if (moveForward == false) { myCC.SimpleMove(Vector3.zero); }
+            if (moveForward == false) {
+                myCC.SimpleMove(Vector3.zero);
+            }
         }
+
         // Check to see if I should move
         if (moveForward) {
             // Find the forward direction

@@ -124,16 +124,18 @@ namespace MobileVRInventory {
         #endregion
 
         void Awake() {
-            if (!itemDatabase)
+            if (!itemDatabase){
                 Debug.LogWarning(
-                    "[MobileVRInventory] Warning: VRInventory requires a reference to an InventoryItemDatabase.");
+                    "[MobileVRInventory] Warning: VRInventory requires a reference to an InventoryItemDatabase.");}
             if (inventoryPositionTransform == null) {
                 inventoryPositionTransform = Camera.main.transform.Find("InventoryPosition");
             }
 
             mainCamera = Camera.main.transform;
 
-            if (Application.isPlaying && autoSave) Load();
+            if (Application.isPlaying && autoSave) {
+                Load();
+            }
         }
 
         void OnEnable() {
@@ -204,7 +206,9 @@ namespace MobileVRInventory {
 
 #if UNITY_EDITOR
             // if we're not in play mode, and showInventoryItemsInEditMode is false, stop here
-            if (!Application.isPlaying && !showInventoryItemsInEditMode) return;
+            if (!Application.isPlaying && !showInventoryItemsInEditMode) {
+                return;
+            }
 #endif            
             int index = 0;
             // create the new items
