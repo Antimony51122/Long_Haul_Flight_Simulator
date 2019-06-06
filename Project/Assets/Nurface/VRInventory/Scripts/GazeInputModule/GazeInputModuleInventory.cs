@@ -98,26 +98,37 @@ public class GazeInputModuleInventory : BaseInputModule {
     public override void Process() {
         // Save the previous Game Object
         GameObject gazeObjectPrevious = GetCurrentGameObject();
+        
         // Cast the ray from gaze
         CastRayFromGaze();
         UpdateCurrentObject();
         UpdateReticle(gazeObjectPrevious);
-        
 
-        bool isNvrTriggered = Input.GetMouseButtonDown(0);
+        bool isNvrTriggered             = Input.GetMouseButtonDown(0);
         bool handlePendingClickRequired = !Input.GetMouseButton(0);
 
-        // Handle input
+        bool isOvrTriggered            = Input.GetButtonDown("Fire1");
+        bool handlePendingFireRequired = !Input.GetButton("Fire1");
+
+        // Handle input with mouse
         if (!Input.GetMouseButtonDown(0) && Input.GetMouseButton(0)) {
             HandleDrag();
         } else if (Time.unscaledTime - pointerData.clickTime < clickTime) {
             // Delay new events until clickTime has passed.
-        } else if (!pointerData.eligibleForClick &&
-            (isNvrTriggered || Input.GetMouseButtonDown(0))) {
+        } else if (!pointerData.eligibleForClick && (isNvrTriggered || Input.GetMouseButtonDown(0))) {
             // New trigger action.
             HandleTrigger();
         } else if (handlePendingClickRequired) {
             // Check if there is a pending click to handle.
+            HandlePendingClick();
+        }
+
+        // Handle input with right hand controller
+        if (!Input.GetButtonDown("Fire1") && Input.GetButton("Fire1")) {
+            HandleDrag();
+        } else if (!pointerData.eligibleForClick && (isOvrTriggered || Input.GetButtonDown("Fire1"))) {
+            HandleTrigger();
+        } else if (handlePendingFireRequired) {
             HandlePendingClick();
         }
     }
@@ -139,7 +150,7 @@ public class GazeInputModuleInventory : BaseInputModule {
         pointerData.pointerCurrentRaycast = FindFirstRaycast(m_RaycastResultCache);
         m_RaycastResultCache.Clear();
         pointerData.delta = headPose - lastHeadPose;
-        lastHeadPose = headPose;
+        lastHeadPose      = headPose;
         //Debug.DrawLine(Camera.main.transform.position, pointerData.pointerCurrentRaycast.worldPosition, Color.red, 10f);
     }
 
@@ -185,6 +196,7 @@ public class GazeInputModuleInventory : BaseInputModule {
                 ExecuteEvents.beginDragHandler);
             pointerData.dragging = true;
         }
+
         // Drag notification
         if (pointerData.dragging && moving && pointerData.pointerDrag != null) {
             // Before doing drag we should cancel any pointer down state
@@ -232,7 +244,7 @@ public class GazeInputModuleInventory : BaseInputModule {
     private void HandleTrigger() {
         var go = pointerData.pointerCurrentRaycast.gameObject;
         // Send pointer down event.
-        pointerData.pressPosition = pointerData.position;
+        pointerData.pressPosition       = pointerData.position;
         pointerData.pointerPressRaycast = pointerData.pointerCurrentRaycast;
         pointerData.pointerPress =
             ExecuteEvents.ExecuteHierarchy(go, pointerData, ExecuteEvents.pointerDownHandler)
@@ -259,11 +271,16 @@ public class GazeInputModuleInventory : BaseInputModule {
 
     private Vector2 NormalizedCartesianToSpherical(Vector3 cartCoords) {
         cartCoords.Normalize();
-        if (cartCoords.x == 0)
+        if (cartCoords.x == 0) {
             cartCoords.x = Mathf.Epsilon;
+        }
+
         float outPolar = Mathf.Atan(cartCoords.z / cartCoords.x);
-        if (cartCoords.x < 0)
+
+        if (cartCoords.x < 0) {
             outPolar += Mathf.PI;
+        }
+
         float outElevation = Mathf.Asin(cartCoords.y);
         return new Vector2(outPolar, outElevation);
     }
