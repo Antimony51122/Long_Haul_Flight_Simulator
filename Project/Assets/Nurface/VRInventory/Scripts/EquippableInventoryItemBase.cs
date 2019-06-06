@@ -5,32 +5,16 @@ using UnityEngine.EventSystems;
 using System.Collections;
 using System;
 
-namespace MobileVRInventory
-{    
-    /// <summary>
-    /// Use this class as the base for your equippable items in order to define behaviour for them
-    /// </summary>    
-    public abstract class EquippableInventoryItemBase : MonoBehaviour
-    {
-        /// <summary>
-        /// Override this method to determine what happens when the item is equipped
-        /// </summary>
-        public virtual void OnItemEquipped()
-        {
-        }
+namespace MobileVRInventory {
+    // Use this class as the base for your equippable items in order to define behaviour for them
+    public abstract class EquippableInventoryItemBase : MonoBehaviour {
+        // Override this method to determine what happens when the item is equipped
+        public virtual void OnItemEquipped() { }
 
-        /// <summary>
-        /// Override this method to determine what happens when the item is unequipped
-        /// </summary>
-        public virtual void OnItemUnequipped()
-        {
-        }
+        // Override this method to determine what happens when the item is unequipped
+        public virtual void OnItemUnequipped() { }
 
-        /// <summary>
-        /// Override this method to determine what happens when the item is "used" while equipped
-        /// </summary>
-        public virtual void OnItemUsed()
-        {
-        }        
+        // Override this method to determine what happens when the item is "used" while equipped
+        public virtual void OnItemUsed() { }
     }
 }
