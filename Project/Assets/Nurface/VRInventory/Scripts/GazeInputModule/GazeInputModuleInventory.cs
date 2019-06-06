@@ -44,12 +44,16 @@ using UnityEngine.XR;
 public class GazeInputModuleInventory : BaseInputModule {    
     // The GazePointer which will be responding to gaze events.
     public static GazePointerInventory gazePointer;
+
     // Current Pointer Data
     public PointerEventData pointerData;
+
     // Center of screen point. This is different for GoogleVR and Native Unity VR modes
     private Vector2 centerOfScreen;
+   
     // The previous headpose
     private Vector2 lastHeadPose;    
+    
     // Time in seconds between the pointer down and up events sent by a trigger.
     // Allows time for the UI elements to make their state transitions.
     private const float clickTime = 0.1f;
@@ -143,6 +147,7 @@ public class GazeInputModuleInventory : BaseInputModule {
         // Send enter events and update the highlight.
         var go = pointerData.pointerCurrentRaycast.gameObject;
         HandlePointerExitAndEnter(pointerData, go);
+
         // Update the current selection, or clear if it is no longer the current object.
         var selected = ExecuteEvents.GetEventHandler<ISelectHandler>(go);
         if (selected == eventSystem.currentSelectedGameObject) {
@@ -204,6 +209,7 @@ public class GazeInputModuleInventory : BaseInputModule {
             gazePointer.OnGazeTriggerEnd(camera);
         }
         var go = pointerData.pointerCurrentRaycast.gameObject;
+        
         // Send pointer up and click events.
         ExecuteEvents.Execute(pointerData.pointerPress, pointerData, ExecuteEvents.pointerUpHandler);
         if (pointerData.eligibleForClick) {
@@ -212,14 +218,15 @@ public class GazeInputModuleInventory : BaseInputModule {
             ExecuteEvents.ExecuteHierarchy(go, pointerData, ExecuteEvents.dropHandler);
             ExecuteEvents.Execute(pointerData.pointerDrag, pointerData, ExecuteEvents.endDragHandler);
         }
+
         // Clear the click state.
-        pointerData.pointerPress = null;
-        pointerData.rawPointerPress = null;
+        pointerData.pointerPress     = null;
+        pointerData.rawPointerPress  = null;
         pointerData.eligibleForClick = false;
-        pointerData.clickCount = 0;
-        pointerData.clickTime = 0;
-        pointerData.pointerDrag = null;
-        pointerData.dragging = false;
+        pointerData.clickCount       = 0;
+        pointerData.clickTime        = 0;
+        pointerData.pointerDrag      = null;
+        pointerData.dragging         = false;
     }
 
     private void HandleTrigger() {
@@ -235,14 +242,16 @@ public class GazeInputModuleInventory : BaseInputModule {
         if (pointerData.pointerDrag != null) {
             ExecuteEvents.Execute(pointerData.pointerDrag, pointerData, ExecuteEvents.initializePotentialDrag);
         }
+
         // Save the pending click state.
-        pointerData.rawPointerPress = go;
+        pointerData.rawPointerPress  = go;
         pointerData.eligibleForClick = true;
-        pointerData.delta = Vector2.zero;
-        pointerData.dragging = false;
+        pointerData.delta            = Vector2.zero;
+        pointerData.dragging         = false;
         pointerData.useDragThreshold = true;
-        pointerData.clickCount = 1;
-        pointerData.clickTime = Time.unscaledTime;
+        pointerData.clickCount       = 1;
+        pointerData.clickTime        = Time.unscaledTime;
+
         if (gazePointer != null) {
             gazePointer.OnGazeTriggerStart(pointerData.enterEventCamera);
         }

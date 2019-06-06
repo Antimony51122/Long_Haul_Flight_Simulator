@@ -94,7 +94,7 @@ namespace MobileVRInventory {
         void UpdateBars(bool instant = false) {
             var time = instant ? 0f : 0.5f;
 
-            // 
+            // Fade in the bars when there is a change to the values
             //FadeInBars();
 
             if (healthSlider != null) {
@@ -149,12 +149,16 @@ namespace MobileVRInventory {
         void FadeOutCoins() {
             iTween.StopByName(coinsPanel.gameObject, "fadeOutCoins");
             iTween.ScaleTo(coinsPanel.gameObject,
-                iTween.Hash("scale", Vector3.zero, "time", 1f, "delay", 4f, "name", "fadeOutCoins"));
+                iTween.Hash("scale", Vector3.zero, 
+                    "time",  1f, 
+                    "delay", 4f, 
+                    "name",  "fadeOutCoins"));
         }
 
         void FadeInCoins() {
             iTween.StopByName(coinsPanel.gameObject, "fadeInCoins");
-            iTween.ScaleTo(coinsPanel.gameObject, iTween.Hash("scale", Vector3.one, "time", 1f, "name", "fadeInCoins"));
+            iTween.ScaleTo(coinsPanel.gameObject, 
+                iTween.Hash("scale", Vector3.one, "time", 1f, "name", "fadeInCoins"));
         }
 
         void UpdateCoinTextAnimated() {

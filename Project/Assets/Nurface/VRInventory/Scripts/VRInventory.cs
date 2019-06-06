@@ -461,7 +461,7 @@ namespace MobileVRInventory {
             CreateEvent(scrollRightButton, EventTriggerType.PointerDown, ScrollRightButtonClicked);
             itemContainerScrollRect = currentUI.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(1).GetChild(0).gameObject.GetComponent<ScrollRect>();
 
-            _scrollLeftButton = scrollLeftButton.GetComponent<Button>();
+            _scrollLeftButton  = scrollLeftButton.GetComponent<Button>();
             _scrollRightButton = scrollRightButton.GetComponent<Button>();
 
             currentUI.transform.localScale = Vector3.zero;

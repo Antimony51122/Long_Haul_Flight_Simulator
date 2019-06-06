@@ -104,8 +104,8 @@ namespace MobileVRInventory {
             var position = Camera.main.transform.position + new Vector3(0, -0.5f, 0);
             iTween.MoveTo(this.gameObject,
                 iTween.Hash("position", position,
-                    "time", 0.35f,
-                    "oncomplete", "ItemPickupAnimationComplete",
+                    "time",             0.35f,
+                    "oncomplete",       "ItemPickupAnimationComplete",
                     "oncompletetarget", this.gameObject));
 
             var sound = itemData.pickupSound;
