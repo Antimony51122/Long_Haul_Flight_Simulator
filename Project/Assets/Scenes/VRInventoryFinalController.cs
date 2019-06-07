@@ -23,13 +23,6 @@ namespace MobileVRInventory {
         public Slider comfortSlider;
         public Slider embarrasementSlider;
 
-        [SerializeField] private GameObject _laptopPrefab;
-        [SerializeField] private GameObject _phonePrefab;
-        [SerializeField] private GameObject _passportPrefab;
-
-        private Transform _laptopSpawnTransform;
-        private Transform _phoneSpawnTransform;
-
         // Coin Panel
         public Image coinsPanel;
         public Text  coinsText;
@@ -39,10 +32,30 @@ namespace MobileVRInventory {
 
         private int lastCoinValue = 0;
 
+        // Terminal Check Panel
+        [SerializeField] private GameObject _laptopPrefab;
+        [SerializeField] private GameObject _phonePrefab;
+        [SerializeField] private GameObject _passportPrefab;
+
+        private Transform _laptopSpawnTransform;
+        private Transform _phoneSpawnTransform;
+
+        // Player Camera View Position
+        [SerializeField] private GameObject _playerInventoryBundle;
+
+        private Transform _terminalRallyPoint;
+        private Transform _planeRallyPoint;
+
         void Start() {
             // Find the position to spawn two devices
             _laptopSpawnTransform = GameObject.Find("SpawnPosLaptop").transform;
-            _phoneSpawnTransform = GameObject.Find("SpawnPosPhone").transform;
+            _phoneSpawnTransform  = GameObject.Find("SpawnPosPhone").transform;
+
+            // Find the reference to the main character camera view
+            _playerInventoryBundle = GameObject.Find("PlayerInventoryBundle");
+
+            _terminalRallyPoint = GameObject.Find("TerminalRallyPoint").transform;
+            _planeRallyPoint    = GameObject.Find("PlaneRallyPoint").transform;
 
             // Listen to VR Inventory events
             VRInventory.onItemSelected.AddListener(ItemSelected);
@@ -77,6 +90,12 @@ namespace MobileVRInventory {
                     break;
                 case "Smartphone":
                     HandleLPhoneUse(stack);
+                    break;
+                case "GoToTerminal":
+                    HandleGoToTerminal(stack);
+                    break;
+                case "GoToPlane":
+                    HandleGoToPlane(stack);
                     break;
             }
         }
@@ -136,6 +155,19 @@ namespace MobileVRInventory {
                 _phoneSpawnTransform.rotation);
 
             VRInventory.RemoveItem("Smartphone", 1, stack);
+        }
+
+        void HandleGoToTerminal(InventoryItemStack stack) {
+            // Set the Player's position to the terminal check point
+            _playerInventoryBundle.transform.position = _terminalRallyPoint.position;
+
+            VRInventory.RemoveItem("GoToTerminal", 1, stack);
+        }
+
+        void HandleGoToPlane(InventoryItemStack stack) {
+            _playerInventoryBundle.transform.position = _planeRallyPoint.position;
+
+            VRInventory.RemoveItem("GoToPlane", 1, stack);
         }
 
         // ---------------------------------------------------------------------------
