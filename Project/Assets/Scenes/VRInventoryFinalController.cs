@@ -85,6 +85,9 @@ namespace MobileVRInventory {
             }
         }
 
+        // TODO: when hydration > 75: automatically go to toilet, Message "Sorry, May I go to the toilet"
+
+
         void HandleWaterBottleUse(InventoryItemStack stack) {
             if (hydration < 100) {
                 hydration = Math.Min(hydration + 15, 100);
