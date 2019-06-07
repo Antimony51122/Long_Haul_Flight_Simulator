@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Linq;
 using System;
+using UnityEditor;
 
 namespace MobileVRInventory {
     public class VRInventoryFinalController : MonoBehaviour {
@@ -22,6 +23,13 @@ namespace MobileVRInventory {
         public Slider comfortSlider;
         public Slider embarrasementSlider;
 
+        [SerializeField] private GameObject laptopPrefab;
+        [SerializeField] private GameObject phonePrefab;
+        [SerializeField] private GameObject passportPrefab;
+
+        private Transform _laptopSpawnTransform;
+        private Transform phoneSpawnTransform;
+
         // Coin Panel
         public Image coinsPanel;
         public Text  coinsText;
@@ -32,6 +40,10 @@ namespace MobileVRInventory {
         private int lastCoinValue = 0;
 
         void Start() {
+            // Find the position to spawn two devices
+            _laptopSpawnTransform = GameObject.Find("SpawnPosLaptop").transform;
+            Debug.Log(_laptopSpawnTransform);
+
             // Listen to VR Inventory events
             VRInventory.onItemSelected.AddListener(ItemSelected);
             VRInventory.onItemPickedUp.AddListener(ItemPickedUp);
@@ -100,6 +112,14 @@ namespace MobileVRInventory {
             } else {
                 ShowMessage("You are already fully hydrated!");
             }
+        }
+
+        void HandleLaptopUse(InventoryItemStack stack)
+        {
+
+
+            VRInventory.RemoveItem("WaterBottle", 1, stack);
+
         }
 
         // ---------------------------------------------------------------------------
