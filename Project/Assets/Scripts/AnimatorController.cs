@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using MobileVRInventory;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -12,9 +13,9 @@ public class AnimatorController : MonoBehaviour {
     [SerializeField] private RuntimeAnimatorController _controllerSit      = null;
     [SerializeField] private RuntimeAnimatorController _controllerTraverse = null;
 
-    [SerializeField] private GameObject _waypointNetwork_seatToWCBack    = null;
-    [SerializeField] private GameObject _waypointNetwork_WCBackToWCFront = null;
-    [SerializeField] private GameObject _waypointNetwork_WCFrontToSeat   = null;
+    //[SerializeField] private GameObject _waypointNetwork_seatToWCBack    = null;
+    //[SerializeField] private GameObject _waypointNetwork_WCBackToWCFront = null;
+    //[SerializeField] private GameObject _waypointNetwork_WCFrontToSeat   = null;
 
     [SerializeField] private bool _isTraversing;
     [SerializeField] private bool _isSitting;
@@ -24,6 +25,11 @@ public class AnimatorController : MonoBehaviour {
     private float _navPosZ;
 
     private float posZ;
+
+    // retrieve reference from the Player Inventory
+    private VRInventoryFinalController _vrInventoryFinalController;
+
+    [SerializeField] private GameObject _ui;
 
     void Start() {
         _animator = GetComponent<Animator>();
@@ -39,6 +45,8 @@ public class AnimatorController : MonoBehaviour {
 
         _navAgentNoRootMotion.enabled = false;
 
+        _vrInventoryFinalController = _ui.GetComponent<VRInventoryFinalController>();
+        //Debug.Log(_vrInventoryFinalController.goToToliet);
     }
 
     void Update() {
@@ -51,6 +59,9 @@ public class AnimatorController : MonoBehaviour {
 
         AssignSitAnimator();
 
+        if (_vrInventoryFinalController.goToToliet == true) {
+            _isSitting = false;
+        }
     }
 
     IEnumerator GoToWC() {
