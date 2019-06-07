@@ -39,6 +39,7 @@ namespace MobileVRInventory {
 
         private Transform _laptopSpawnTransform;
         private Transform _phoneSpawnTransform;
+        private Transform _passportSpawnTransform;
 
         // Player Camera View Position
         [SerializeField] private GameObject _playerInventoryBundle;
@@ -48,8 +49,9 @@ namespace MobileVRInventory {
 
         void Start() {
             // Find the position to spawn two devices
-            _laptopSpawnTransform = GameObject.Find("SpawnPosLaptop").transform;
-            _phoneSpawnTransform  = GameObject.Find("SpawnPosPhone").transform;
+            _laptopSpawnTransform   = GameObject.Find("SpawnPosLaptop").transform;
+            _phoneSpawnTransform    = GameObject.Find("SpawnPosPhone").transform;
+            _passportSpawnTransform = GameObject.Find("SpawnPosPassport").transform;
 
             // Find the reference to the main character camera view
             _playerInventoryBundle = GameObject.Find("PlayerInventoryBundle");
@@ -90,6 +92,9 @@ namespace MobileVRInventory {
                     break;
                 case "Smartphone":
                     HandleLPhoneUse(stack);
+                    break;
+                case "Passport":
+                    HandleLPassportUse(stack);
                     break;
                 case "GoToTerminal":
                     HandleGoToTerminal(stack);
@@ -155,6 +160,15 @@ namespace MobileVRInventory {
                 _phoneSpawnTransform.rotation);
 
             VRInventory.RemoveItem("Smartphone", 1, stack);
+        }
+
+        void HandleLPassportUse(InventoryItemStack stack) {
+            Instantiate(
+                _passportPrefab,
+                _passportSpawnTransform.position,
+                _passportSpawnTransform.rotation);
+
+            VRInventory.RemoveItem("Passport", 1, stack);
         }
 
         void HandleGoToTerminal(InventoryItemStack stack) {
