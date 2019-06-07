@@ -23,11 +23,11 @@ namespace MobileVRInventory {
         public Slider embarrasementSlider;
 
         // Coin Panel
-        public Image  coinsPanel;
-        public Text   coinsText;
+        public Image coinsPanel;
+        public Text  coinsText;
 
-        public Image  messagePanel;
-        public Text   messageText;
+        public Image messagePanel;
+        public Text  messageText;
 
         private int lastCoinValue = 0;
 
@@ -74,7 +74,11 @@ namespace MobileVRInventory {
                 ShowMessage("You cannot carry anymore of those.");
             }
         }
-        
+
+        // ---------------------------------------------------------------------------
+        // Handling Usage of all Items
+        // ---------------------------------------------------------------------------
+
         void HandleChocolateUse(InventoryItemStack stack) {
             if (fullness < 100) {
                 fullness = Math.Min(fullness + 25, 100);
@@ -97,6 +101,10 @@ namespace MobileVRInventory {
                 ShowMessage("You are already fully hydrated!");
             }
         }
+
+        // ---------------------------------------------------------------------------
+        // Functions updating UI bars
+        // ---------------------------------------------------------------------------
 
         void UpdateBars(bool instant = false) {
             var time = instant ? 0f : 0.5f;
