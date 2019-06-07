@@ -162,17 +162,17 @@ namespace MobileVRInventory {
 
         // Called by iTween to animate the fatigue Bar
         void UpdateFatigueBar(float newValue) {
-            hydrationSlider.value = newValue;
+            fatigueSlider.value = newValue;
         }
 
         // Called by iTween to animate the comfort Bar
         void UpdateComfortBar(float newValue) {
-            hydrationSlider.value = newValue;
+            comfortSlider.value = newValue;
         }
 
         // Called by iTween to animate the embarrassment  Bar
         void UpdateEmbarrassmentBar(float newValue) {
-            hydrationSlider.value = newValue;
+            embarrasementSlider.value = newValue;
         }
 
         void FadeOutBars() {
