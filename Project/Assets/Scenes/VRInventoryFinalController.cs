@@ -23,12 +23,12 @@ namespace MobileVRInventory {
         public Slider comfortSlider;
         public Slider embarrasementSlider;
 
-        [SerializeField] private GameObject laptopPrefab;
-        [SerializeField] private GameObject phonePrefab;
-        [SerializeField] private GameObject passportPrefab;
+        [SerializeField] private GameObject _laptopPrefab;
+        [SerializeField] private GameObject _phonePrefab;
+        [SerializeField] private GameObject _passportPrefab;
 
         private Transform _laptopSpawnTransform;
-        private Transform phoneSpawnTransform;
+        private Transform _phoneSpawnTransform;
 
         // Coin Panel
         public Image coinsPanel;
@@ -42,7 +42,7 @@ namespace MobileVRInventory {
         void Start() {
             // Find the position to spawn two devices
             _laptopSpawnTransform = GameObject.Find("SpawnPosLaptop").transform;
-            Debug.Log(_laptopSpawnTransform);
+            _phoneSpawnTransform = GameObject.Find("SpawnPosPhone").transform;
 
             // Listen to VR Inventory events
             VRInventory.onItemSelected.AddListener(ItemSelected);
@@ -71,6 +71,12 @@ namespace MobileVRInventory {
                     break;
                 case "WaterBottle":
                     HandleWaterBottleUse(stack);
+                    break;
+                case "Laptop":
+                    HandleLaptopUse(stack);
+                    break;
+                case "Smartphone":
+                    HandleLPhoneUse(stack);
                     break;
             }
         }
@@ -114,12 +120,22 @@ namespace MobileVRInventory {
             }
         }
 
-        void HandleLaptopUse(InventoryItemStack stack)
-        {
+        void HandleLaptopUse(InventoryItemStack stack) {
+            Instantiate(
+                _laptopPrefab,
+                _laptopSpawnTransform.position,
+                _laptopSpawnTransform.rotation);
 
+            VRInventory.RemoveItem("Laptop", 1, stack);
+        }
 
-            VRInventory.RemoveItem("WaterBottle", 1, stack);
+        void HandleLPhoneUse(InventoryItemStack stack) {
+            Instantiate(
+                _phonePrefab,
+                _phoneSpawnTransform.position,
+                _phoneSpawnTransform.rotation);
 
+            VRInventory.RemoveItem("Smartphone", 1, stack);
         }
 
         // ---------------------------------------------------------------------------
