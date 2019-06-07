@@ -4,6 +4,7 @@ using System.Collections;
 using System.Linq;
 using System;
 using UnityEditor;
+using UnityEngine.Experimental.PlayerLoop;
 
 namespace MobileVRInventory {
     public class VRInventoryFinalController : MonoBehaviour {
@@ -47,6 +48,9 @@ namespace MobileVRInventory {
         private Transform _terminalRallyPoint;
         private Transform _planeRallyPoint;
 
+        // Toilet
+        public bool goToToliet = false;
+
         void Start() {
             // Find the position to spawn two devices
             _laptopSpawnTransform   = GameObject.Find("SpawnPosLaptop").transform;
@@ -77,6 +81,10 @@ namespace MobileVRInventory {
 
             // hide the message panel initially
             messagePanel.transform.localScale = Vector3.zero;
+        }
+
+        void Update() {
+
         }
 
         void ItemSelected(InventoryItemStack stack) {
@@ -131,13 +139,16 @@ namespace MobileVRInventory {
             }
         }
 
-        // TODO: when hydration > 75: automatically go to toilet, Message "Sorry, May I go to the toilet"
-
-
         void HandleWaterBottleUse(InventoryItemStack stack) {
             if (hydration < 100) {
                 hydration = Math.Min(hydration + 15, 100);
                 VRInventory.RemoveItem("WaterBottle", 1, stack);
+
+                if (hydration > 75) {
+                    goToToliet = true;
+                    GoToToilet();
+                }
+
                 UpdateBars();
             } else {
                 ShowMessage("You are already fully hydrated!");
@@ -241,6 +252,11 @@ namespace MobileVRInventory {
 
             // Fade out the bars after a brief delay
             //FadeOutBars();
+        }
+
+        void GoToToilet() {
+            ShowMessage("Sorry to bother, I need to go to the toilet");
+            embarrasement += 50;
         }
 
         // Called by iTween to animate the fullness Bar
