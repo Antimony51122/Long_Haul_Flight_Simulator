@@ -57,8 +57,8 @@ namespace MobileVRInventory {
                 case "Chocolate":
                     HandleChocolateUse(stack);
                     break;
-                case "Mana Potion":
-                    HandleManaPotionUse(stack);
+                case "WaterBottle":
+                    HandleWaterBottleUse(stack);
                     break;
             }
         }
@@ -85,10 +85,10 @@ namespace MobileVRInventory {
             }
         }
 
-        void HandleManaPotionUse(InventoryItemStack stack) {
+        void HandleWaterBottleUse(InventoryItemStack stack) {
             if (hydration < 100) {
                 hydration = Math.Min(hydration + 15, 100);
-                VRInventory.RemoveItem("Mana Potion", 1, stack);
+                VRInventory.RemoveItem("WaterBottle", 1, stack);
                 UpdateBars();
             } else {
                 ShowMessage("You are already fully hydrated!");
