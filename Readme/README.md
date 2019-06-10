@@ -1704,7 +1704,7 @@ The simulation will start with the scene in your home. The user needs to figure 
 
 <table>
   <tr>
-    <th>Packing up Stage</th>
+    <th>Packing up Scene</th>
   </tr>
   <tr>
     <td>
@@ -1732,23 +1732,56 @@ There are stuff you must bring like the passport where if you forget it, you can
   </tr>
 </table>
 
-### Passing the Terminal Port Stage
+### Passing the Terminal Check-point Stage
 
-When passing the terminal, you will be facing a bloated annoying bureaucratic officer, you need to hand in your passport to pass the port. (in future stages of development, I will be adding in some conversations)
+When passing the terminal, you will be facing a bloated annoying bureaucratic officer, you need to hand in your passport to pass the port. (in future stages of development, I will be adding in some conversations for better mimicking the scenario)
 
 <table>
   <tr>
-    <th></th>
+    <th>Passing the Terminal Check-point</th>
   </tr>
   <tr>
     <td>
-      <img src="NotesAssets/04_final_design/01_pick_item.gif" width=1080px>
+      <img src="NotesAssets/04_final_design/02_pass_checkpoint.gif" width=1080px>
     </td>
   </tr>
 </table>
 
+> Alternatively, you can take out the sword in the previous stage and stab the officer, which makes it more satisfying.
 
+After interacting with the officer, the user will need to pass the metal scanner:
 
+<table>
+  <tr>
+    <th>Passing through the Metal Scanner, Placing Laptop and Phone on the Convoyer</th>
+    <th>Looking at the Departure Board</th>
+  </tr>
+  <tr>
+    <td>
+      <img src="NotesAssets/04_final_design/laptop_phone_convoyer.jpg">
+    </td>
+    <td>
+      <img src="NotesAssets/04_final_design/departure_board.jpg">
+    </td>
+  </tr>
+</table>
+
+### On-Plane Stage
+
+The essence of the on-plane stage is the interaction engagements between the user and the NPCs, one of the most important feature is when the user is sitting by the window, but drink too much water thus get too hydrated and would like to go to the toilet, than there will sort of embarrassing interactions between the user and the two passengers sitting outside him:
+
+<table>
+  <tr>
+    <th>Asking for go to the toilet scene</th>
+  </tr>
+  <tr>
+    <td>
+      <img src="NotesAssets/04_final_design/03_go_to_toilet.gif" width=1080px>
+    </td>
+  </tr>
+</table>
+
+> Pay attention to how the hydration meter changes when the player too much water, and how embarrassment meter increases when the user is embarrassingly interacting with the two NPCs outside.
 
 <br />
 
