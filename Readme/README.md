@@ -1694,14 +1694,58 @@ public class NavAgentRootMotion : MonoBehaviour {
 
 
 
+## Final Design
 
+Now, have a look at the basic features at each stage of the simulation game:
 
+### Packing up Stage
 
+The simulation will start with the scene in your home. The user needs to figure out the essential stuff to bring for the flight. When you stare at stuff that can be brought, the dot will transform to a circle, indicating pickability:
 
+<table>
+  <tr>
+    <th>Packing up Stage</th>
+  </tr>
+  <tr>
+    <td>
+      <img src="NotesAssets/04_final_design/01_pick_item.gif" width=1080px>
+    </td>
+  </tr>
+</table>
 
+As long as you pick it, the item will show up in the inventory interface.
 
+There are stuff you must bring like the passport where if you forget it, you can never pass the custom, and something, you ... shouldn't bring:
 
+<table>
+  <tr>
+    <th>Passport, Phone & Money</th>
+    <th>Laptop and Emmmm... something shouldn't be brought</th>
+  </tr>
+  <tr>
+    <td>
+      <img src="NotesAssets/04_final_design/passport.jpg">
+    </td>
+    <td>
+      <img src="NotesAssets/04_final_design/laptop_sword.jpg">
+    </td>
+  </tr>
+</table>
 
+### Passing the Terminal Port Stage
+
+When passing the terminal, you will be facing a bloated annoying bureaucratic officer, you need to hand in your passport to pass the port. (in future stages of development, I will be adding in some conversations)
+
+<table>
+  <tr>
+    <th></th>
+  </tr>
+  <tr>
+    <td>
+      <img src="NotesAssets/04_final_design/01_pick_item.gif" width=1080px>
+    </td>
+  </tr>
+</table>
 
 
 
