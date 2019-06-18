@@ -1785,6 +1785,37 @@ The essence of the on-plane stage is the interaction engagements between the use
 
 <br />
 
+### Idle Images for Inventory
+
+For the inventory items created, each has been assigned an abstracted icon:
+
+<table>
+  <tr>
+    <th>Passport</th>
+    <th>Chocolate</th>
+    <th>water Bottle</th>
+    <th>Laptop</th>
+    <th>Mobile Phone</th>
+  </tr>
+  <tr>
+    <td>
+      <img src="NotesAssets/05_inventory_item_icons/passport.png">
+    </td>
+    <td>
+      <img src="NotesAssets/05_inventory_item_icons/chocolate1.png">
+    </td>
+    <td>
+      <img src="NotesAssets/05_inventory_item_icons/waterbottle.png">
+    </td>
+    <td>
+      <img src="NotesAssets/05_inventory_item_icons/laptop.png">
+    </td>
+    <td>
+      <img src="NotesAssets/05_inventory_item_icons/mobile-phone-512.png">
+    </td>
+  </tr>
+</table>
+
 ----------
 
 ## Nomenclature
