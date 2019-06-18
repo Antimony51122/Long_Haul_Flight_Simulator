@@ -1787,7 +1787,7 @@ The essence of the on-plane stage is the interaction engagements between the use
 
 ### Idle Images for Inventory
 
-For the inventory items created, each has been assigned an abstracted icon:
+For the inventory items created, each has been assigned an abstracted icon which will show-up in the inventory interface when the player nod his head:
 
 <table>
   <tr>
@@ -1798,21 +1798,11 @@ For the inventory items created, each has been assigned an abstracted icon:
     <th>Mobile Phone</th>
   </tr>
   <tr>
-    <td>
-      <img src="NotesAssets/05_inventory_item_icons/passport.png">
-    </td>
-    <td>
-      <img src="NotesAssets/05_inventory_item_icons/chocolate1.png">
-    </td>
-    <td>
-      <img src="NotesAssets/05_inventory_item_icons/waterbottle.png">
-    </td>
-    <td>
-      <img src="NotesAssets/05_inventory_item_icons/laptop.png">
-    </td>
-    <td>
-      <img src="NotesAssets/05_inventory_item_icons/mobile-phone-512.png">
-    </td>
+    <td><img src="NotesAssets/05_inventory_item_icons/passport.png"     width=200px></td>
+    <td><img src="NotesAssets/05_inventory_item_icons/chocolate1.png"   width=200px></td>
+    <td><img src="NotesAssets/05_inventory_item_icons/waterbottle.png"  width=200px></td>
+    <td><img src="NotesAssets/05_inventory_item_icons/laptop.png"       width=200px></td>
+    <td><img src="NotesAssets/05_inventory_item_icons/mobile-phone.png" width=200px></td>
   </tr>
 </table>
 
