@@ -7,8 +7,8 @@ using UnityEngine.AI;
 public class AnimatorController : MonoBehaviour {
     private Animator _animator = null;
 
-    [SerializeField] private Avatar _avatarSit      = null;
-    [SerializeField] private Avatar _avatarTraverse = null;
+    [SerializeField] private Avatar _avatarSit      = null; // the avatar for sitting postures of the NPCs
+    [SerializeField] private Avatar _avatarTraverse = null; // the avatar for walking postures of the NPCs
 
     [SerializeField] private RuntimeAnimatorController _controllerSit      = null;
     [SerializeField] private RuntimeAnimatorController _controllerTraverse = null;
@@ -30,7 +30,7 @@ public class AnimatorController : MonoBehaviour {
     private VRInventoryFinalController _vrInventoryFinalController;
 
     [SerializeField] private GameObject _ui;
-
+    
     void Start() {
         _animator = GetComponent<Animator>();
 
@@ -66,9 +66,6 @@ public class AnimatorController : MonoBehaviour {
 
     IEnumerator GoToWC() {
         if (!_isSitting) {
-
-            
-
             // set _isTraversing to true to satisfy the condition preparing for traverse
             _isTraversing = true;
 
